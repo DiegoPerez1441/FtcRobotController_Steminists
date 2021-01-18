@@ -59,7 +59,23 @@ public class BasicOpMode_Linear extends LinearOpMode {
     //========================================
 
     //Game Pad controls
-    
+    // y stik is to move up and down
+    // x stick is to move left
+    if (-gamepad1.left_stick_y == true) {
+        leftback.setPower(0.5);
+        rightback.setPower(0.5);
+        leftfront.setPower(0.5);
+        rightfront.setPower(0.5);
+    }
+    if (gamepad1.right_stick_x == true) {
+        leftback.setPower(0.5);
+        rightback.setPower(0.5);
+        leftfront.setPower(0.5);
+        rightfront.setPower(0.5);
+
+    }
+
+
     // Motors
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftfront = null;
@@ -68,7 +84,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
     private DcMotor rightback = null;
 
     // Servos
-// hi 
+
     
     @Override
     public void runOpMode() {
@@ -80,7 +96,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
         //========================================
 
         // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
+        // the name is the quotaton points are the names of the motors
         // step (using the FTC Robot Controller app on the phone).
         leftfront  = hardwareMap.get(DcMotor.class, "leftfront");
         leftback = hardwareMap.get(DcMotor.class, "leftback");
@@ -119,6 +135,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
             leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
             rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
 
+
             // Tank Mode uses one stick to control each wheel.
             // - This requires no math, but it is hard to drive forward slowly and keep straight.
             // leftPower  = -gamepad1.left_stick_y ;
@@ -138,6 +155,11 @@ public class BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.update();
+
         }
+
+
+
     }
+
 }
