@@ -67,12 +67,9 @@ public class BasicOpMode_Linear extends LinearOpMode {
     private DcMotor rightfront = null;
     private DcMotor rightback = null;
 
-
-
     // Servos
 
-
-
+    
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
