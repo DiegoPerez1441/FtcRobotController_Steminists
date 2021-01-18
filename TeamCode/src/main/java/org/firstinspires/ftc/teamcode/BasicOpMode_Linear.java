@@ -59,9 +59,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
     //========================================
 
     //Game Pad controls
-
-
-
+    
     // Motors
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftfront = null;
