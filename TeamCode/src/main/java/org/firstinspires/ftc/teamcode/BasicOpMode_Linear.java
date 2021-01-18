@@ -58,23 +58,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
     // DECLARE OPMODE MEMBERS
     //========================================
 
-    //Game Pad controls
-    // y stik is to move up and down
-    // x stick is to move left
-    if (-gamepad1.left_stick_y == true) {
-        leftback.setPower(0.5);
-        rightback.setPower(0.5);
-        leftfront.setPower(0.5);
-        rightfront.setPower(0.5);
-    }
-    if (gamepad1.right_stick_x == true) {
-        leftback.setPower(0.5);
-        rightback.setPower(0.5);
-        leftfront.setPower(0.5);
-        rightfront.setPower(0.5);
-
-    }
-
+   
 
     // Motors
     private ElapsedTime runtime = new ElapsedTime();
@@ -157,7 +141,22 @@ public class BasicOpMode_Linear extends LinearOpMode {
             telemetry.update();
 
         }
+ //Game Pad controls
+    // y stik is to move up and down
+    // x stick is to move left
+    if (-gamepad1.left_stick_y == true) {
+        leftback.setPower(0.5);
+        rightback.setPower(0.5);
+        leftfront.setPower(0.5);
+        rightfront.setPower(0.5);
+    }
+    if (gamepad1.right_stick_x == true) {
+        leftback.setPower(0.5);
+        rightback.setPower(0.5);
+        leftfront.setPower(0.5);
+        rightfront.setPower(0.5);
 
+    }
 
 
     }
