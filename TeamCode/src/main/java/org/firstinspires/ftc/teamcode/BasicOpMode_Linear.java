@@ -35,6 +35,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.hardware.Servo;
 
 
 /**
@@ -68,6 +69,11 @@ public class BasicOpMode_Linear extends LinearOpMode {
     private DcMotor rightback = null;
 
     // Servos
+    Servo clawServo;
+    double clawServo_position = 0.0;
+
+
+
 
     
     @Override
@@ -86,6 +92,12 @@ public class BasicOpMode_Linear extends LinearOpMode {
         leftback = hardwareMap.get(DcMotor.class, "leftback");
         rightfront  = hardwareMap.get(DcMotor.class, "rightfront");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
+
+        //hardware mappping the servos and giving them the position
+        clawServo = hardwareMap.servo.get("clawServo");
+        clawServo.setPosition(clawServo_position);
+
+
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -141,23 +153,23 @@ public class BasicOpMode_Linear extends LinearOpMode {
             telemetry.update();
 
         }
- //Game Pad controls
-    // y stik is to move up and down
-    // x stick is to move left
-    if (-gamepad1.left_stick_y == true) {
-        leftback.setPower(0.5);
-        rightback.setPower(0.5);
-        leftfront.setPower(0.5);
-        rightfront.setPower(0.5);
-    }
-    if (gamepad1.right_stick_x == true) {
-        leftback.setPower(0.5);
-        rightback.setPower(0.5);
-        leftfront.setPower(0.5);
-        rightfront.setPower(0.5);
+
 
     }
-
+        //Game Pad controls
+        // y stik is to move up and down
+        // x stick is to move left
+        if (-gamepad1.left_stick_y == true) {
+            leftback.setPower(0.5);
+            rightback.setPower(0.5);
+            leftfront.setPower(0.5);
+            rightfront.setPower(0.5);
+        }
+        if (gamepad1.right_stick_x == true) {
+            leftback.setPower(0.5);
+            rightback.setPower(0.5);
+            leftfront.setPower(0.5);
+            rightfront.setPower(0.5);
 
     }
 
