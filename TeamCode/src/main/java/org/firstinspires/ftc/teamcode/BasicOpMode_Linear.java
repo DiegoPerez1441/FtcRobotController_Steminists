@@ -59,7 +59,6 @@ public class BasicOpMode_Linear extends LinearOpMode {
     // DECLARE OPMODE MEMBERS
     //========================================
 
-   
 
     // Motors
     private ElapsedTime runtime = new ElapsedTime();
@@ -73,9 +72,6 @@ public class BasicOpMode_Linear extends LinearOpMode {
     double clawServo_position = 0.0;
 
 
-
-
-    
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -93,10 +89,9 @@ public class BasicOpMode_Linear extends LinearOpMode {
         rightfront  = hardwareMap.get(DcMotor.class, "rightfront");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
 
-        //hardware mappping the servos and giving them the position
+        //hardware mapping the servos and giving them the position
         clawServo = hardwareMap.servo.get("clawServo");
         clawServo.setPosition(clawServo_position);
-
 
 
         // Most robots need the motor on one side to be reversed to drive forward
@@ -152,24 +147,31 @@ public class BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.update();
 
+            // Game Pad controls
+            // y stik is to move up and down
+            // x stick is to move left
+
+            /*
+             * This section of the code might be unnecessary because this Op Mode already implements a POV driving mode
+             * */
+
+            /*
+            if (-gamepad1.left_stick_y == true) {
+                leftback.setPower(0.5);
+                rightback.setPower(0.5);
+                leftfront.setPower(0.5);
+                rightfront.setPower(0.5);
+            }
+            if (gamepad1.right_stick_x == true) {
+                leftback.setPower(0.5);
+                rightback.setPower(0.5);
+                leftfront.setPower(0.5);
+                rightfront.setPower(0.5);
+            }
+            */
+
         }
 
-
-    }
-        //Game Pad controls
-        // y stik is to move up and down
-        // x stick is to move left
-        if (-gamepad1.left_stick_y == true) {
-            leftback.setPower(0.5);
-            rightback.setPower(0.5);
-            leftfront.setPower(0.5);
-            rightfront.setPower(0.5);
-        }
-        if (gamepad1.right_stick_x == true) {
-            leftback.setPower(0.5);
-            rightback.setPower(0.5);
-            leftfront.setPower(0.5);
-            rightfront.setPower(0.5);
 
     }
 
