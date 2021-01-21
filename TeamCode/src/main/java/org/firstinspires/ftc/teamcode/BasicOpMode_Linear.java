@@ -96,10 +96,11 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        leftback.setDirection(DcMotor.Direction.FORWARD);
-        rightback.setDirection(DcMotor.Direction.REVERSE);
         leftfront.setDirection(DcMotor.Direction.FORWARD);
+        leftback.setDirection(DcMotor.Direction.FORWARD);
         rightfront.setDirection(DcMotor.Direction.REVERSE);
+        rightback.setDirection(DcMotor.Direction.REVERSE);
+
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -113,30 +114,31 @@ public class BasicOpMode_Linear extends LinearOpMode {
             //========================================
 
             // Setup a variable for each drive wheel to save power level for telemetry
-            double leftPower;
-            double rightPower;
+            double FrontLeftPower;
+            double BackLeftPower;
+            double FrontRightPower;
+            double BackRightPower;
 
-            // Choose to drive using either Tank Mode, or POV Mode
-            // Comment out the method that's not used.  The default below is POV.
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
             double drive = -gamepad1.left_stick_y;
-            double turn  =  gamepad1.right_stick_x;
-            leftPower    = Range.clip(drive + turn, -1.0, 1.0) ;
-            rightPower   = Range.clip(drive - turn, -1.0, 1.0) ;
+            double turn  =  gamepad1.right_stick_x * 1.5;
+            double turnning = gamepad1.right_stick_x;
+            //here is the adapted calculated power on the motors
+            // in addition to the two more added motors
+            FrontLeftPower    = Range.clip(drive + turn + turnning, -1.0, 1.0) ;
+            BackLeftPower   = Range.clip(drive - turn + turnning, -1.0, 1.0) ;
+            FrontRightPower   = Range.clip(drive - turn - turnning, -1.0, 1.0) ;
+            BackRightPower   = Range.clip(drive + turn - turnning, -1.0, 1.0) ;
 
-
-            // Tank Mode uses one stick to control each wheel.
-            // - This requires no math, but it is hard to drive forward slowly and keep straight.
-            // leftPower  = -gamepad1.left_stick_y ;
-            // rightPower = -gamepad1.right_stick_y ;
 
             // Send calculated power to wheels
-            leftback.setPower(leftPower);
-            rightback.setPower(rightPower);
-            leftfront.setPower(leftPower);
-            rightfront.setPower(rightPower);
+            leftfront.setPower(FrontLeftPower);
+            leftback.setPower(BackLeftPower);
+            rightfront.setPower(FrontRightPower);
+            rightback.setPower(BackRightPower);
+
 
             //========================================
             // GAMEPAD1
@@ -147,28 +149,6 @@ public class BasicOpMode_Linear extends LinearOpMode {
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.update();
 
-            // Game Pad controls
-            // y stik is to move up and down
-            // x stick is to move left
-
-            /*
-             * This section of the code might be unnecessary because this Op Mode already implements a POV driving mode
-             * */
-
-            /*
-            if (-gamepad1.left_stick_y == true) {
-                leftback.setPower(0.5);
-                rightback.setPower(0.5);
-                leftfront.setPower(0.5);
-                rightfront.setPower(0.5);
-            }
-            if (gamepad1.right_stick_x == true) {
-                leftback.setPower(0.5);
-                rightback.setPower(0.5);
-                leftfront.setPower(0.5);
-                rightfront.setPower(0.5);
-            }
-            */
 
         }
 
