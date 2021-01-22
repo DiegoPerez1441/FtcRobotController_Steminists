@@ -110,43 +110,46 @@ public class BasicOpMode_Linear extends LinearOpMode {
         while (opModeIsActive()) {
 
             //========================================
-            // POV DRIVING MODE
+            // MECANUM DRIVETRAIN
             //========================================
 
             // Setup a variable for each drive wheel to save power level for telemetry
-            double FrontLeftPower;
-            double BackLeftPower;
-            double FrontRightPower;
-            double BackRightPower;
-
+            double frontLeftPower;
+            double backLeftPower;
+            double frontRightPower;
+            double backRightPower;
 
             // POV Mode uses left stick to go forward, and right stick to turn.
-            // - This uses basic math to combine motions and is easier to drive straight.
-            double drive = -gamepad1.left_stick_y;
-            double turn  =  gamepad1.right_stick_x * 1.5;
-            double turnning = gamepad1.right_stick_x;
-            //here is the adapted calculated power on the motors
-            // in addition to the two more added motors
-            FrontLeftPower    = Range.clip(drive + turn + turnning, -1.0, 1.0) ;
-            BackLeftPower   = Range.clip(drive - turn + turnning, -1.0, 1.0) ;
-            FrontRightPower   = Range.clip(drive - turn - turnning, -1.0, 1.0) ;
-            BackRightPower   = Range.clip(drive + turn - turnning, -1.0, 1.0) ;
+            // This uses basic math to combine motions and is easier to drive straight.
+            double y = -gamepad1.left_stick_y;
+            double x  =  gamepad1.right_stick_x * 1.5;
+            double turning = gamepad1.right_stick_x;
 
+            // here is the adapted calculated power on the motors
+            // in addition to the two more added motors
+            frontLeftPower    = Range.clip(y + x + turning, -1.0, 1.0) ;
+            backLeftPower   = Range.clip(y - x + turning, -1.0, 1.0) ;
+            frontRightPower   = Range.clip(y - x - turning, -1.0, 1.0) ;
+            backRightPower   = Range.clip(y + x - turning, -1.0, 1.0) ;
 
             // Send calculated power to wheels
-            leftfront.setPower(FrontLeftPower);
-            leftback.setPower(BackLeftPower);
-            rightfront.setPower(FrontRightPower);
-            rightback.setPower(BackRightPower);
+            leftfront.setPower(frontLeftPower);
+            leftback.setPower(backLeftPower);
+            rightfront.setPower(frontRightPower);
+            rightback.setPower(backRightPower);
 
 
             //========================================
-            // GAMEPAD1
+            // GAMEPADS
             //========================================
+
+            /*
+            * This is the ideal place to put you code regarding the gamepads to control the robot
+            * */
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
+            //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.update();
 
 
