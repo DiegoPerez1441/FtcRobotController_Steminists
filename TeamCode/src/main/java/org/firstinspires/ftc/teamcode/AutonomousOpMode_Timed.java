@@ -62,8 +62,10 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
     // Motors
-    private DcMotor leftDrive = null;
-    private DcMotor rightDrive = null;
+    private DcMotor leftfront = null;
+    private DcMotor leftback = null;
+    private DcMotor rightfront = null;
+    private DcMotor rightback = null;
 
     // Servos
 
@@ -84,8 +86,10 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftfront.setDirection(DcMotor.Direction.FORWARD);
+        leftback.setDirection(DcMotor.Direction.FORWARD);
+        rightfront.setDirection(DcMotor.Direction.REVERSE);
+        rightback.setDirection(DcMotor.Direction.REVERSE);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -102,8 +106,12 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
             * We're going to park the robot on the line by timing it
             * */
 
-            // Write code here
-
+            // drive forward for 2 seconds
+            leftfront.setpower(1.0);
+            leftback.setpower(1.0);
+            rightfront.setpower(1.0);
+            rightback.setpower(1.0);
+            sleep(2000);
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
