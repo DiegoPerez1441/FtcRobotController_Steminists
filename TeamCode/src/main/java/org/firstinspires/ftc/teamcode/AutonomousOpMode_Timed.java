@@ -81,15 +81,24 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftDrive  = hardwareMap.get(DcMotor.class, "leftDrive");
-        rightDrive = hardwareMap.get(DcMotor.class, "rightDrive");
+        leftfront  = hardwareMap.get(DcMotor.class, "leftfront");
+        leftback = hardwareMap.get(DcMotor.class, "leftback");
+        rightfront  = hardwareMap.get(DcMotor.class, "rightfront");
+        rightback = hardwareMap.get(DcMotor.class, "rightback");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
+<<<<<<< Updated upstream
         leftfront.setDirection(DcMotor.Direction.FORWARD);
         leftback.setDirection(DcMotor.Direction.FORWARD);
         rightfront.setDirection(DcMotor.Direction.REVERSE);
         rightback.setDirection(DcMotor.Direction.REVERSE);
+=======
+        leftfront.setDirection(DcMotor.Direction.REVERSE);
+        leftback.setDirection(DcMotor.Direction.REVERSE);
+        rightfront.setDirection(DcMotor.Direction.FORWARD);
+        rightback.setDirection(DcMotor.Direction.FORWARD);
+>>>>>>> Stashed changes
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -101,7 +110,12 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
             //========================================
             // Autonomous Mode
             //========================================
-
+            // drive forward for 2 seconds
+            leftfront.setPower(1.0);
+            leftback.setPower(1.0);
+            rightfront.setPower(1.0);
+            rightback.setPower(1.0);
+            sleep(2000);
             /*
             * We're going to park the robot on the line by timing it
             * */
@@ -116,6 +130,10 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.update();
+            leftfront.setPower(0.0);
+            leftback.setPower(0.0);
+            rightfront.setPower(0.0);
+            rightback.setPower(0.0);
         }
     }
 }
