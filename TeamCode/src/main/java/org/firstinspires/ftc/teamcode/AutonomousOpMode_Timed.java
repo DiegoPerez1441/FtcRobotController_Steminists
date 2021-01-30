@@ -33,6 +33,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -99,8 +100,8 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
         rightback.setDirection(DcMotor.Direction.FORWARD);
         
         //hardware map servos
-        leftservo = hardwareMap.servo.get("leftservo")
-        rightservo = hardwareMap.servo.get("rightservo")
+        leftservo = hardwareMap.servo.get("leftservo");
+        rightservo = hardwareMap.servo.get("rightservo");
         double leftservo_position = 0.0;
         double rightservo_position = 0.0;
         leftservo.setPosition(leftservo_position);
@@ -123,21 +124,25 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
             * */
 
             // drive forward for 2 seconds
-            leftfront.setpower(1.0);
-            leftback.setpower(1.0);
-            rightfront.setpower(1.0);
-            rightback.setpower(1.0);
+            leftfront.setPower(1.0);
+            leftback.setPower(1.0);
+            rightfront.setPower(1.0);
+            rightback.setPower(1.0);
             sleep(2000);
-            lefftservo_position = 1.0;
+            leftservo_position = 1.0;
             rightservo_position = 1.0;
+
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.update();
-            leftfront.setPower(0.0);
-            leftback.setPower(0.0);
-            rightfront.setPower(0.0);
-            rightback.setPower(0.0);
         }
+
+        // Stop the robot after the autonomous period
+        leftfront.setPower(0.0);
+        leftback.setPower(0.0);
+        rightfront.setPower(0.0);
+        rightback.setPower(0.0);
+
     }
 }
