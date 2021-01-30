@@ -103,10 +103,10 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
         //hardware mapping the SERVOS and giving them the position
         //RIGHTSTICK SERVO
-        rightStick = hardwareMap.get(Servo.class,"rightstick");
+        rightStick = hardwareMap.get(Servo.class,"rightStick");
         rightStick.setPosition(rightStick_HOME);
         //LEFTSTICK SERVO
-        leftStick = hardwareMap.get(Servo.class,"leftstick");
+        leftStick = hardwareMap.get(Servo.class,"leftStick");
         leftStick.setPosition(leftStick_HOME);
 
         // Most robots need the motor on one side to be reversed to drive forward
@@ -164,17 +164,17 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
             //Servo Gamepad position and speed
             //RIGHTSTICK SERVO
-            if (gamepad1.dpad_up) {
+            if (gamepad1.y = true) {
                 rightStickposition += rightStick_SPEED;
             }
-                else if (gamepad1.dpad_down) {
+                else if (gamepad1.y = false) {
                     rightStickposition -= rightStick_SPEED;
                 }
                 //LEFTSTICK SERVO
-                if (gamepad1.dpad_up) {
+                if (gamepad1.a = true) {
                 leftStickposition += leftStick_SPEED;
             }
-            else if (gamepad1.dpad_down) {
+            else if (gamepad1.a = false) {
                 leftStickposition -= leftStick_SPEED;
             }
 
