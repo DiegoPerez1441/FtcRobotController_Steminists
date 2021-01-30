@@ -29,7 +29,6 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -70,20 +69,23 @@ public class BasicOpMode_Linear extends LinearOpMode {
     // Servos and Start Position
     private Servo rightStick = null;
     private Servo leftStick = null;
-    public final static double rightStick_HOME = 0.0;
-    public final static double leftStick_HOME = 0.0;
+    private static final double RIGHT_STICK_HOME = 0.0;
+    private static final double LEFT_STICK_HOME = 0.0;
 
     //Min and Max the servo can move
     //RIGHTSTICK SERVO
-    public final static double rightStick_MIN_RANGE = 0.0;
-    public final static double rightStick_MAX_RANGE = 1.0;
-    double rightStickposition = rightStick_HOME;
-    final double rightStick_SPEED = 0.2;
+    private static final double RIGHT_STICK_MIN_RANGE = 0.0;
+    private static final double RIGHT_STICK_MAX_RANGE = 1.0;
+    double rightStickposition = RIGHT_STICK_HOME;
+    private static final double RIGHT_STICK_SPEED = 0.2;
+
     //LEFTSTICK SERVO
-    public final static double leftStick_MIN_RANGE = 0.0;
-    public final static double leftStick_MAX_RANGE = 1.0;
-    double leftStickposition = rightStick_HOME;
-    final double leftStick_SPEED = 0.2;
+    private static final double LEFT_STICK_MIN_RANGE = 0.0;
+    private static final double LEFT_STICK_MAX_RANGE = 1.0;
+    double leftStickposition = RIGHT_STICK_HOME;
+    private static final double LEFT_STICK_SPEED = 0.2;
+
+
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -104,10 +106,11 @@ public class BasicOpMode_Linear extends LinearOpMode {
         //hardware mapping the SERVOS and giving them the position
         //RIGHTSTICK SERVO
         rightStick = hardwareMap.get(Servo.class,"rightStick");
-        rightStick.setPosition(rightStick_HOME);
+        rightStick.setPosition(RIGHT_STICK_HOME);
+
         //LEFTSTICK SERVO
         leftStick = hardwareMap.get(Servo.class,"leftStick");
-        leftStick.setPosition(leftStick_HOME);
+        leftStick.setPosition(LEFT_STICK_HOME);
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -159,32 +162,32 @@ public class BasicOpMode_Linear extends LinearOpMode {
             //========================================
 
             /*
-            * This is the ideal place to put you code regarding the gamepads to control the robot
-            * */
+             * This is the ideal place to put you code regarding the gamepads to control the robot
+             * */
 
-            //Servo Gamepad position and speed
+            // Servo Gamepad position and speed
             //RIGHTSTICK SERVO
             if (gamepad1.y = true) {
-                rightStickposition += rightStick_SPEED;
-            }
-                else if (gamepad1.y = false) {
-                    rightStickposition -= rightStick_SPEED;
-                }
-                //LEFTSTICK SERVO
-                if (gamepad1.a = true) {
-                leftStickposition += leftStick_SPEED;
-            }
-            else if (gamepad1.a = false) {
-                leftStickposition -= leftStick_SPEED;
+                rightStickposition += RIGHT_STICK_SPEED;
+            } else if (gamepad1.y = false) {
+                rightStickposition -= RIGHT_STICK_SPEED;
             }
 
-
-            //Actual Movement of Servos
-            //RIGHTSTICK SERVO
-            rightStickposition = Range.clip(rightStickposition, rightStick_MIN_RANGE,rightStick_MAX_RANGE);
-            rightStick.setPosition(rightStickposition);
             //LEFTSTICK SERVO
-            leftStickposition = Range.clip(leftStickposition, leftStick_MIN_RANGE,leftStick_MAX_RANGE);
+            if (gamepad1.a = true) {
+                leftStickposition += LEFT_STICK_SPEED;
+            } else if (gamepad1.a = false) {
+                leftStickposition -= LEFT_STICK_SPEED;
+            }
+
+
+            // Actual Movement of Servos
+            //RIGHTSTICK SERVO
+            rightStickposition = Range.clip(rightStickposition, RIGHT_STICK_MIN_RANGE, RIGHT_STICK_MAX_RANGE);
+            rightStick.setPosition(rightStickposition);
+
+            //LEFTSTICK SERVO
+            leftStickposition = Range.clip(leftStickposition, LEFT_STICK_MIN_RANGE, LEFT_STICK_MAX_RANGE);
             leftStick.setPosition(leftStickposition);
 
             // Show the elapsed game time and wheel power.
