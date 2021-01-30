@@ -67,9 +67,23 @@ public class BasicOpMode_Linear extends LinearOpMode {
     private DcMotor rightfront = null;
     private DcMotor rightback = null;
 
-    // Servos
+    // Servos and Start Position
+    private Servo rightStick = null;
+    private Servo leftStick = null;
+    public final static double rightStick_HOME = 0.0;
+    public final static double leftStick_HOME = 0.0;
 
-
+    //Min and Max the servo can move
+    //RIGHTSTICK SERVO
+    public final static double rightStick_MIN_RANGE = 0.0;
+    public final static double rightStick_MAX_RANGE = 1.0;
+    double rightStickposition = rightStick_HOME;
+    final double rightStick_SPEED = 0.2;
+    //LEFTSTICK SERVO
+    public final static double leftStick_MIN_RANGE = 0.0;
+    public final static double leftStick_MAX_RANGE = 1.0;
+    double leftStickposition = rightStick_HOME;
+    final double leftStick_SPEED = 0.2;
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -87,10 +101,13 @@ public class BasicOpMode_Linear extends LinearOpMode {
         rightfront  = hardwareMap.get(DcMotor.class, "rightfront");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
 
-        //hardware mapping the servos and giving them the position
-        clawServo = hardwareMap.servo.get("clawServo");
-        clawServo.setPosition(clawServo_position);
-
+        //hardware mapping the SERVOS and giving them the position
+        //RIGHTSTICK SERVO
+        rightStick = hardwareMap.get(Servo.class,"rightstick");
+        rightStick.setPosition(rightStick_HOME);
+        //LEFTSTICK SERVO
+        leftStick = hardwareMap.get(Servo.class,"leftstick");
+        leftStick.setPosition(leftStick_HOME);
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -145,9 +162,36 @@ public class BasicOpMode_Linear extends LinearOpMode {
             * This is the ideal place to put you code regarding the gamepads to control the robot
             * */
 
+            //Servo Gamepad position and speed
+            //RIGHTSTICK SERVO
+            if (gamepad1.dpad_up) {
+                rightStickposition += rightStick_SPEED;
+            }
+                else if (gamepad1.dpad_down) {
+                    rightStickposition -= rightStick_SPEED;
+                }
+                //LEFTSTICK SERVO
+                if (gamepad1.dpad_up) {
+                leftStickposition += leftStick_SPEED;
+            }
+            else if (gamepad1.dpad_down) {
+                leftStickposition -= leftStick_SPEED;
+            }
+
+
+            //Actual Movement of Servos
+            //RIGHTSTICK SERVO
+            rightStickposition = Range.clip(rightStickposition, rightStick_MIN_RANGE,rightStick_MAX_RANGE);
+            rightStick.setPosition(rightStickposition);
+            //LEFTSTICK SERVO
+            leftStickposition = Range.clip(leftStickposition, leftStick_MIN_RANGE,leftStick_MAX_RANGE);
+            leftStick.setPosition(leftStickposition);
+
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
+            telemetry.addData("rightStick", "%.2f", rightStickposition);
+            telemetry.addData("leftStick", "%.2f", leftStickposition);
             telemetry.update();
 
 
