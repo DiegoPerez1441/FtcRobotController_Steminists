@@ -102,10 +102,6 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
         //hardware map servos
         leftservo = hardwareMap.servo.get("leftservo");
         rightservo = hardwareMap.servo.get("rightservo");
-        double leftservo_position = 0.0;
-        double rightservo_position = 0.0;
-        leftservo.setPosition(leftservo_position);
-        leftservo.setPosition(leftservo_position);
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -128,9 +124,17 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
             leftback.setPower(1.0);
             rightfront.setPower(1.0);
             rightback.setPower(1.0);
-            sleep(2000);
-            leftservo_position = 1.0;
-            rightservo_position = 1.0;
+            sleep(3500);
+            
+            clawmotor.setPower(1.0);
+            sleep(1000);
+            
+            //change name if we change name on configuration
+            leftservo.setPosition(0.5);
+            sleep(1000);
+            
+            leftservo.setPosition(0.0);
+            sleep(1000);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
