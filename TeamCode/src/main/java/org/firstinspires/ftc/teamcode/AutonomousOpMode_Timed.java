@@ -75,6 +75,34 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
     double leftservo_position = 0.0;
     double rightservo_position = 0.0;
 
+    static void moveForward () {
+        leftfront.setPower(1.0);
+        leftback.setPower(1.0);
+        rightfront.setPower(1.0);
+        rightback.setPower(1.0);
+    }
+    
+    static void moveBack () {
+        leftfront.setPower(-1.0);
+        leftback.setPower(-1.0);
+        rightfront.setPower(-1.0);
+        rightback.setPower(-1.0);
+    }
+    
+    static void moveLeft () {
+        leftfront.setPower(-1.0);
+        leftback.setPower(1.0);
+        rightfront.setPower(1.0);
+        rightback.setPower(-1.0);
+    }
+    
+    static void moveRight () {
+        leftfront.setPower(1.0);
+        leftback.setPower(-1.0);
+        rightfront.setPower(-1.0);
+        rightback.setPower(1.0);
+    }
+    
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
@@ -120,10 +148,7 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
             * */
 
             // drive forward for 2 seconds
-            leftfront.setPower(1.0);
-            leftback.setPower(1.0);
-            rightfront.setPower(1.0);
-            rightback.setPower(1.0);
+            moveForward();
             sleep(3500);
             
             clawmotor.setPower(1.0);
