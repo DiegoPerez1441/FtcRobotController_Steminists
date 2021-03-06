@@ -69,8 +69,10 @@ public class BasicOpMode_Linear extends LinearOpMode {
     // Servos and Start Position
     private Servo rightStick = null;
     private Servo leftStick = null;
+    private Servo clawservo = null;
     private static final double RIGHT_STICK_HOME = 0.0;
     private static final double LEFT_STICK_HOME = 0.0;
+    private static final double CLAW_SERVO_HOME = 0.0;
 
     //Min and Max the servo can move
     //RIGHTSTICK SERVO
@@ -85,6 +87,11 @@ public class BasicOpMode_Linear extends LinearOpMode {
     double leftStickposition = RIGHT_STICK_HOME;
     private static final double LEFT_STICK_SPEED = 0.2;
 
+    //CLAW SERVO
+    private static final double CLAW_SERVO_MIN_RANGE = 0.0;
+    private static final double CLAW_SERVO_MAX_RANGE = 1.0;
+    double leftStickposition = CLAW_SERVO_HOME;
+    private static final double CLAW_SERVO_SPEED = 0.2;
 
     @Override
     public void runOpMode() {
@@ -112,6 +119,10 @@ public class BasicOpMode_Linear extends LinearOpMode {
         leftStick = hardwareMap.get(Servo.class,"leftStick");
         leftStick.setPosition(LEFT_STICK_HOME);
 
+        //CLAW SERVO
+        clawservo = hardwareMap.get(Servo.class,"clawservo");
+        clawservo.setPosition(CLAW_SERVO_HOME);
+        
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
         leftfront.setDirection(DcMotor.Direction.FORWARD);
@@ -142,11 +153,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
             double y = -gamepad1.left_stick_y;
             double x  =  gamepad1.right_stick_x;
             double turning = gamepad1.right_stick_x * 1.5;
-            
-            
-            double a  =  gamepad2.right_stick_x;
-            double b = gamepad2.right_stick_x;
-
+           
             // here is the adapted calculated power on the motors
             // in addition to the two more added motors
             frontLeftPower    = Range.clip(y + x + turning, -1.0, 1.0) ;
@@ -194,6 +201,10 @@ public class BasicOpMode_Linear extends LinearOpMode {
             leftStickposition = Range.clip(leftStickposition, LEFT_STICK_MIN_RANGE, LEFT_STICK_MAX_RANGE);
             leftStick.setPosition(leftStickposition);
 
+            //LEFTSTICK SERVO
+            clawservoposition = Range.clip(clawservoposition, CLAW_SERVO_MIN_RANGE, CLAW_SERVO_MAX_RANGE);
+            clawservo.setPosition(clawservoposition);
+            
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
