@@ -146,6 +146,10 @@ public class BasicOpMode_Linear extends LinearOpMode {
             double y = -gamepad1.left_stick_y;
             double x  =  gamepad1.right_stick_x;
             double turning = gamepad1.right_stick_x * 1.5;
+            
+            
+            double a  =  gamepad2.right_stick_x;
+            double b = gamepad2.right_stick_x;
 
             // here is the adapted calculated power on the motors
             // in addition to the two more added motors
@@ -153,7 +157,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
             backLeftPower   = Range.clip(y - x + turning, -1.0, 1.0) ;
             frontRightPower   = Range.clip(y - x - turning, -1.0, 1.0) ;
             backRightPower   = Range.clip(y + x - turning, -1.0, 1.0) ;
-            clawmotorPower   = Range.clip(y + x - turning, -1.0, 1.0) ;
+            clawmotorPower   = Range.clip(b + a) ;
             
             // Send calculated power to wheels
             leftfront.setPower(frontLeftPower);
@@ -185,9 +189,9 @@ public class BasicOpMode_Linear extends LinearOpMode {
             } else if (gamepad1.a = false) {
                 leftStickposition -= LEFT_STICK_SPEED;
             }
-
-
-            // Actual Movement of Servos
+            
+            
+            // Actual Movement of Servosright_stick_x
             //RIGHTSTICK SERVO
             rightStickposition = Range.clip(rightStickposition, RIGHT_STICK_MIN_RANGE, RIGHT_STICK_MAX_RANGE);
             rightStick.setPosition(rightStickposition);
