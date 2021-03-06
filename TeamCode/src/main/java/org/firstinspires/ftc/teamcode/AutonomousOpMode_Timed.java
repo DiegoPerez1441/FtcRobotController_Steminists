@@ -69,12 +69,12 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
     private DcMotor rightback = null;
 
     // Servos
-    private Servo leftservo;
-    private Servo rightservo;
-    private Servo clawservo
+    private Servo leftStick;
+    private Servo rightStick;
+    private Servo clawservo;
     
-    double leftservo_position = 0.0;
-    double rightservo_position = 0.0;
+    double leftStick_position = 0.0;
+    double rightStick_position = 0.0;
     double clawservo_position = 0.0;
 
     static void moveForward () {
@@ -130,8 +130,8 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
         rightback.setDirection(DcMotor.Direction.FORWARD);
         
         //hardware map servos
-        leftservo = hardwareMap.servo.get("leftservo");
-        rightservo = hardwareMap.servo.get("rightservo");
+        leftStick = hardwareMap.servo.get("leftservo");
+        rightStick = hardwareMap.servo.get("rightservo");
         clawservo = hardwareMap.servo.get("clawservo");
 
 
@@ -158,10 +158,10 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
             sleep(1000);
             
             //change name if we change name on configuration
-            leftservo.setPosition(0.5);
+            leftStick.setPosition(0.5);
             sleep(1000);
             
-            leftservo.setPosition(0.0);
+            leftStick.setPosition(0.0);
             sleep(1000);
 
             // Show the elapsed game time and wheel power.
