@@ -67,6 +67,7 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
     private DcMotor leftback = null;
     private DcMotor rightfront = null;
     private DcMotor rightback = null;
+    private DcMotor clawmotor = null;
 
     // Servos
     private Servo leftservo;
@@ -119,6 +120,7 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
         leftback = hardwareMap.get(DcMotor.class, "leftback");
         rightfront  = hardwareMap.get(DcMotor.class, "rightfront");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
+        clawmotor = hardwareMap.get(DcMotor.class, "clawmotor");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -126,6 +128,7 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
         leftback.setDirection(DcMotor.Direction.REVERSE);
         rightfront.setDirection(DcMotor.Direction.FORWARD);
         rightback.setDirection(DcMotor.Direction.FORWARD);
+        clawmotor.setDirection(DcMotor.Direction.FORWARD);
         
         //hardware map servos
         leftservo = hardwareMap.servo.get("leftservo");
