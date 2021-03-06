@@ -67,15 +67,14 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
     private DcMotor leftback = null;
     private DcMotor rightfront = null;
     private DcMotor rightback = null;
+    private DcMotor clawmotor = null;
 
     // Servos
     private Servo leftStick;
     private Servo rightStick;
-    private Servo clawservo;
     
     double leftStick_position = 0.0;
     double rightStick_position = 0.0;
-    double clawservo_position = 0.0;
 
     static void moveForward () {
         leftfront.setPower(1.0);
@@ -121,6 +120,7 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
         leftback = hardwareMap.get(DcMotor.class, "leftback");
         rightfront  = hardwareMap.get(DcMotor.class, "rightfront");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
+        clawmotor = hardwareMap.get(DcMotor.class, "clawmotor");
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
@@ -128,11 +128,11 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
         leftback.setDirection(DcMotor.Direction.REVERSE);
         rightfront.setDirection(DcMotor.Direction.FORWARD);
         rightback.setDirection(DcMotor.Direction.FORWARD);
+        clawmotor.setdirection(DcMotor.Direction.FORWARD);
         
         //hardware map servos
         leftStick = hardwareMap.servo.get("leftservo");
         rightStick = hardwareMap.servo.get("rightservo");
-        clawservo = hardwareMap.servo.get("clawservo");
 
 
         // Wait for the game to start (driver presses PLAY)
