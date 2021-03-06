@@ -65,6 +65,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
     private DcMotor leftback = null;
     private DcMotor rightfront = null;
     private DcMotor rightback = null;
+    private DcMotor clawmotor = null;
 
     // Servos and Start Position
     private Servo rightStick = null;
@@ -102,6 +103,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
         leftback = hardwareMap.get(DcMotor.class, "leftback");
         rightfront  = hardwareMap.get(DcMotor.class, "rightfront");
         rightback = hardwareMap.get(DcMotor.class, "rightback");
+        clawmotor = hardwareMap.get(DcMotor.class, "clawmotor");
 
         //hardware mapping the SERVOS and giving them the position
         //RIGHTSTICK SERVO
@@ -118,6 +120,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
         leftback.setDirection(DcMotor.Direction.FORWARD);
         rightfront.setDirection(DcMotor.Direction.REVERSE);
         rightback.setDirection(DcMotor.Direction.REVERSE);
+        clawmotor.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -136,6 +139,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
             double backLeftPower;
             double frontRightPower;
             double backRightPower;
+            double clawmotorPower;
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             // This uses basic math to combine motions and is easier to drive straight.
@@ -149,12 +153,14 @@ public class BasicOpMode_Linear extends LinearOpMode {
             backLeftPower   = Range.clip(y - x + turning, -1.0, 1.0) ;
             frontRightPower   = Range.clip(y - x - turning, -1.0, 1.0) ;
             backRightPower   = Range.clip(y + x - turning, -1.0, 1.0) ;
-
+            clawmotorPower   = Range.clip(y + x - turning, -1.0, 1.0) ;
+            
             // Send calculated power to wheels
             leftfront.setPower(frontLeftPower);
             leftback.setPower(backLeftPower);
             rightfront.setPower(frontRightPower);
             rightback.setPower(backRightPower);
+            clawmotor.setPower(clawmotorPower);
 
 
             //========================================
