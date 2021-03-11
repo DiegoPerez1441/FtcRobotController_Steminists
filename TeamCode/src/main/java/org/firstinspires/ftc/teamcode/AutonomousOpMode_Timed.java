@@ -77,33 +77,6 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
     double leftStick_position = 0.0;
     double rightStick_position = 0.0;
 **/
-    static void moveForward () {
-        leftfront.setPower(1.0);
-        leftback.setPower(1.0);
-        rightfront.setPower(1.0);
-        rightback.setPower(1.0);
-    }
-    
-    static void moveBack () {
-        leftfront.setPower(-1.0);
-        leftback.setPower(-1.0);
-        rightfront.setPower(-1.0);
-        rightback.setPower(-1.0);
-    }
-    
-    static void moveLeft () {
-        leftfront.setPower(-1.0);
-        leftback.setPower(1.0);
-        rightfront.setPower(1.0);
-        rightback.setPower(-1.0);
-    }
-    
-    static void moveRight () {
-        leftfront.setPower(1.0);
-        leftback.setPower(-1.0);
-        rightfront.setPower(-1.0);
-        rightback.setPower(1.0);
-    }
     
     @Override
     public void runOpMode() {
@@ -161,11 +134,11 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
             sleep(1000);
             
             //change name if we change name on configuration
-            leftStick.setPosition(0.5);
-            sleep(1000);
-            
-            leftStick.setPosition(0.0);
-            sleep(1000);
+            //leftStick.setPosition(0.5);
+            //sleep(1000);
+            //
+            //leftStick.setPosition(0.0);
+            //sleep(1000);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -179,5 +152,34 @@ public class AutonomousOpMode_Timed extends LinearOpMode {
         rightfront.setPower(0.0);
         rightback.setPower(0.0);
 
+    }
+
+    /* Drivetrain helper methods */
+    private void moveForward () {
+        leftfront.setPower(1.0);
+        leftback.setPower(1.0);
+        rightfront.setPower(1.0);
+        rightback.setPower(1.0);
+    }
+
+    private void moveBack () {
+        leftfront.setPower(-1.0);
+        leftback.setPower(-1.0);
+        rightfront.setPower(-1.0);
+        rightback.setPower(-1.0);
+    }
+
+    private void moveLeft () {
+        leftfront.setPower(-1.0);
+        leftback.setPower(1.0);
+        rightfront.setPower(1.0);
+        rightback.setPower(-1.0);
+    }
+
+    private void moveRight () {
+        leftfront.setPower(1.0);
+        leftback.setPower(-1.0);
+        rightfront.setPower(-1.0);
+        rightback.setPower(1.0);
     }
 }
