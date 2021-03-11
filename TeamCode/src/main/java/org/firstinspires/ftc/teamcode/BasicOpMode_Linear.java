@@ -34,7 +34,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.Servo;
 
 
 /**
@@ -61,12 +60,12 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
     // Motors
     private ElapsedTime runtime = new ElapsedTime();
-    private DcMotor leftfront = null;
-    private DcMotor leftback = null;
-    private DcMotor rightfront = null;
-    private DcMotor rightback = null;
-    private DcMotor clawmotor = null;
-    private DcMotor stickmotor = null;
+    private DcMotor leftFront = null;
+    private DcMotor leftBack = null;
+    private DcMotor rightFront = null;
+    private DcMotor rightBack = null;
+    private DcMotor clawMotor = null;
+    private DcMotor stickMotor = null;
 
 /*    // Servos and Start Position
     private Servo rightStick = null;
@@ -100,12 +99,13 @@ public class BasicOpMode_Linear extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // the name is the quotaton points are the names of the motors
         // step (using the FTC Robot Controller app on the phone).
-        leftfront  = hardwareMap.get(DcMotor.class, "leftfront");
-        leftback = hardwareMap.get(DcMotor.class, "leftback");
-        rightfront  = hardwareMap.get(DcMotor.class, "rightfront");
-        rightback = hardwareMap.get(DcMotor.class, "rightback");
-        clawmotor = hardwareMap.get(DcMotor.class, "clawmotor");
-        stickmotor = hardwareMap.get(DcMotor.class, "stickmotor);
+        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+
+        clawMotor = hardwareMap.get(DcMotor.class, "clawMotor");
+        stickMotor = hardwareMap.get(DcMotor.class, "stickMotor");
 
   /*      //hardware mapping the SERVOS and giving them the position
         //RIGHTSTICK SERVO
@@ -119,12 +119,13 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
         // Most robots need the motor on one side to be reversed to drive forward
         // Reverse the motor that runs backwards when connected directly to the battery
-        leftfront.setDirection(DcMotor.Direction.FORWARD);
-        leftback.setDirection(DcMotor.Direction.FORWARD);
-        rightfront.setDirection(DcMotor.Direction.REVERSE);
-        rightback.setDirection(DcMotor.Direction.REVERSE);
-        clawmotor.setDirection(DcMotor.Direction.FORWARD);
-        stickmotor.setdirection(DcMotor.Direction.FORWARD);
+        leftFront.setDirection(DcMotor.Direction.FORWARD);
+        leftBack.setDirection(DcMotor.Direction.FORWARD);
+        rightFront.setDirection(DcMotor.Direction.REVERSE);
+        rightBack.setDirection(DcMotor.Direction.REVERSE);
+
+        clawMotor.setDirection(DcMotor.Direction.FORWARD);
+        stickMotor.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -154,19 +155,20 @@ public class BasicOpMode_Linear extends LinearOpMode {
            
             // here is the adapted calculated power on the motors
             // in addition to the two more added motors
-            frontLeftPower    = Range.clip(y + x + turning, -1.0, 1.0) ;
-            backLeftPower   = Range.clip(y - x + turning, -1.0, 1.0) ;
-            frontRightPower   = Range.clip(y - x - turning, -1.0, 1.0) ;
-            backRightPower   = Range.clip(y + x - turning, -1.0, 1.0) ;
-            clawmotorPower   = Range.clip(y + x - turning, -1.0, 1.0) ; 
-            stickmotorPower   = Range.clip(y + x - turning, -1.0, 1.0) ;
+            frontLeftPower  = Range.clip(y + x + turning, -1.0, 1.0);
+            backLeftPower   = Range.clip(y - x + turning, -1.0, 1.0);
+            frontRightPower = Range.clip(y - x - turning, -1.0, 1.0);
+            backRightPower  = Range.clip(y + x - turning, -1.0, 1.0);
+            clawmotorPower  = Range.clip(y + x - turning, -1.0, 1.0);
+            stickmotorPower = Range.clip(y + x - turning, -1.0, 1.0);
+
             // Send calculated power to wheels
-            leftfront.setPower(frontLeftPower);
-            leftback.setPower(backLeftPower);
-            rightfront.setPower(frontRightPower);
-            rightback.setPower(backRightPower);
-            clawmotor.setPower(clawmotorPower);
-            stickmotor.setPower(stickmotorPower);
+            leftFront.setPower(frontLeftPower);
+            leftBack.setPower(backLeftPower);
+            rightFront.setPower(frontRightPower);
+            rightBack.setPower(backRightPower);
+            clawMotor.setPower(clawmotorPower);
+            stickMotor.setPower(stickmotorPower);
 
 
             //========================================
@@ -206,8 +208,8 @@ public class BasicOpMode_Linear extends LinearOpMode {
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             //telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
-            telemetry.addData("rightStick", "%.2f", rightStickposition);
-            telemetry.addData("leftStick", "%.2f", leftStickposition);
+            //telemetry.addData("rightStick", "%.2f", rightStickposition);
+            //telemetry.addData("leftStick", "%.2f", leftStickposition);
             telemetry.update();
 
 
