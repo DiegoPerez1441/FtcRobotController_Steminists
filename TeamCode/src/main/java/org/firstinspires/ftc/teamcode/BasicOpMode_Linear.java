@@ -144,41 +144,37 @@ public class BasicOpMode_Linear extends LinearOpMode {
             double backLeftPower;
             double frontRightPower;
             double backRightPower;
-            double clawmotorPower;
-            double stickmotorPower;
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             // This uses basic math to combine motions and is easier to drive straight.
             double y = -gamepad1.left_stick_y;
             double x  =  gamepad1.right_stick_x;
             double turning = gamepad1.right_stick_x * 1.5;
-            
-            
-            double b = -gamepad2.left_stick_y;
-            double a  =  gamepad2.right_stick_x;
-            double turn = gamepad2.right_stick_x * 1.5;
+
             // here is the adapted calculated power on the motors
-            // in addition to the two more added motors
             frontLeftPower  = Range.clip(y + x + turning, -1.0, 1.0);
             backLeftPower   = Range.clip(y - x + turning, -1.0, 1.0);
             frontRightPower = Range.clip(y - x - turning, -1.0, 1.0);
             backRightPower  = Range.clip(y + x - turning, -1.0, 1.0);
-            
-            clawmotorPower  = Range.clip(b + a - turn, -1.0, 1.0);
-            stickmotorPower = Range.clip(b + a - turn, -1.0, 1.0);
 
             // Send calculated power to wheels
             leftFront.setPower(frontLeftPower);
             leftBack.setPower(backLeftPower);
             rightFront.setPower(frontRightPower);
             rightBack.setPower(backRightPower);
-            clawMotor.setPower(clawmotorPower);
-            stickMotor.setPower(stickmotorPower);
 
 
             //========================================
             // GAMEPADS
             //========================================
+
+            /* Claw */
+            double clawMotorPower = -gamepad2.right_stick_y;
+            double stickMotorPower = -gamepad2.left_stick_y;
+            
+            clawMotor.setPower(clawMotorPower);
+            stickMotor.setPower(stickMotorPower);
+
 
             /*
              * This is the ideal place to put you code regarding the gamepads to control the robot
@@ -198,8 +194,8 @@ public class BasicOpMode_Linear extends LinearOpMode {
             } else if (gamepad1.a = false) {
                 leftStickposition -= LEFT_STICK_SPEED;
             }
-            
-            
+
+
             // Actual Movement of Servosright_stick_x
             //RIGHTSTICK SERVO
             rightStickposition = Range.clip(rightStickposition, RIGHT_STICK_MIN_RANGE, RIGHT_STICK_MAX_RANGE);
