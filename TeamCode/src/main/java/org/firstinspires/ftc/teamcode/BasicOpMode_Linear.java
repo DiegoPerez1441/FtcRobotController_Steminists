@@ -67,19 +67,21 @@ public class BasicOpMode_Linear extends LinearOpMode {
     private DcMotor clawMotor = null;
     private DcMotor stickMotor = null;
 
-/*    // Servos and Start Position
+    // Servos and Start Position
     private Servo rightStick = null;
+ /*  
     private Servo leftStick = null;
     private static final double RIGHT_STICK_HOME = 0.0;
     private static final double LEFT_STICK_HOME = 0.0;
-
+**/
     //Min and Max the servo can move
     //RIGHTSTICK SERVO
-    private static final double RIGHT_STICK_MIN_RANGE = 0.0;
-    private static final double RIGHT_STICK_MAX_RANGE = 1.0;
-    double rightStickposition = RIGHT_STICK_HOME;
-    private static final double RIGHT_STICK_SPEED = 0.2;
-
+    //private static final double RIGHT_STICK_MIN_RANGE = 0.0;
+    //private static final double RIGHT_STICK_MAX_RANGE = 1.0;
+    //private static final double RIGHT_STICK_SPEED = 0.2;
+    double rightStickposition = 0.0;
+    
+/*
     //LEFTSTICK SERVO
     private static final double LEFT_STICK_MIN_RANGE = 0.0;
     private static final double LEFT_STICK_MAX_RANGE = 1.0;
@@ -180,22 +182,23 @@ public class BasicOpMode_Linear extends LinearOpMode {
              * This is the ideal place to put you code regarding the gamepads to control the robot
              * */
 
-            // Servo Gamepad position and speed
-            //RIGHTSTICK SERVO
-         /*   if (gamepad1.y = true) {
-                rightStickposition += RIGHT_STICK_SPEED;
-            } else if (gamepad1.y = false) {
-                rightStickposition -= RIGHT_STICK_SPEED;
-            }
-
+            //Claw Servo 
+            if (gamepad2.a) {
+                rightStick.setPosition(0.0);   
+            } 
+           
+            if (gamepad2.y) {
+                rightStick.setPosition(1.0);
+            } 
+/*
             //LEFTSTICK SERVO
             if (gamepad1.a = true) {
                 leftStickposition += LEFT_STICK_SPEED;
             } else if (gamepad1.a = false) {
                 leftStickposition -= LEFT_STICK_SPEED;
             }
-
-
+**/
+/*
             // Actual Movement of Servosright_stick_x
             //RIGHTSTICK SERVO
             rightStickposition = Range.clip(rightStickposition, RIGHT_STICK_MIN_RANGE, RIGHT_STICK_MAX_RANGE);
