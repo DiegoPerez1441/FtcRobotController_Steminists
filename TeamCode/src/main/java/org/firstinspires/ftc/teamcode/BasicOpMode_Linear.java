@@ -149,7 +149,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             // This uses basic math to combine motions and is easier to drive straight.
-            double y = -gamepad1.left_stick_y;
+           /* double y = -gamepad1.left_stick_y;
             double x  =  gamepad1.right_stick_x;
             double turning = gamepad1.right_stick_x * 1.5;
 
@@ -164,8 +164,34 @@ public class BasicOpMode_Linear extends LinearOpMode {
             leftBack.setPower(backLeftPower);
             rightFront.setPower(frontRightPower);
             rightBack.setPower(backRightPower);
-
-
+**/
+            // loop for sideways movement 
+            double G1rightStickY = -gamepad1.right_stick_y;
+            double G1leftStickY = -gamepad1.left_stick_y;
+            boolean G1rightBumper = gamepad1.right_bumper;
+            boolean G1leftBumper = gamepad1.left_bumper;
+            
+            if (G1rightBumper) {
+                leftFront.setPower(1);
+                leftBack.setPower(-1);
+                rightFront.setPower(-1);
+                rightBack.setPower(1);
+            }
+            else if (G1leftBumper) {
+                leftFront.setPower(-1);
+                leftBack.setPower(1);
+                rightFront.setPower(1);
+                rightBack.setPower(-1);
+            }
+            else {
+                leftFront.setPower(G1leftStickY);
+                leftBack.setPower(G1leftStickY);
+                rightFront.setPower(-G1rightStickY);
+                rightBack.setPower(-G1rightStickY);
+            }
+            
+            
+            
             //========================================
             // GAMEPADS
             //========================================
